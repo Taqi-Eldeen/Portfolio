@@ -1,0 +1,33 @@
+---
+import Layout          from '../layouts/Layout.astro';
+import Nav             from '../components/Nav.astro';
+import Hero            from '../components/Hero.astro';
+import Marquee         from '../components/Marquee.astro';
+import Projects        from '../components/Projects.astro';
+import About           from '../components/About.astro';
+import Skills          from '../components/Skills.astro';
+import Experience      from '../components/Experience.astro';
+import Certifications  from '../components/Certifications.astro';
+import Contact         from '../components/Contact.astro';
+import Footer          from '../components/Footer.astro';
+---
+
+<Layout
+  title="Taqi Eldeen — Cybersecurity & Full-Stack Developer"
+  description="Cybersecurity and CS student at MIU Egypt. Hands-on in network security, WAF development (CyShield-sponsored), and secure web applications. Open to opportunities."
+>
+  <Nav />
+
+  <main id="main" tabindex="-1">
+    <Hero />
+    <Marquee />
+    <Projects />
+    <About />
+    <Skills />
+    <Experience />
+    <Certifications />
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>

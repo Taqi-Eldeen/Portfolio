@@ -1,0 +1,11 @@
+---
+import { marqueeItems } from '../data/cv';
+---
+
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    {marqueeItems.map(item => (
+      <span class="marquee-item">{item}</span>
+    ))}
+  </div>
+</div>

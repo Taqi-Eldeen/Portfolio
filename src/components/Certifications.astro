@@ -1,0 +1,35 @@
+---
+import { certifications } from '../data/cv';
+---
+
+<section id="certifications" class="section" aria-label="Certifications">
+  <div class="container">
+
+    <header class="section-header">
+      <div>
+        <div class="section-num">05 — Credentials</div>
+        <h2 class="section-title" data-reveal>Certifications</h2>
+      </div>
+      <p class="about__body" data-reveal style="max-width:34ch;">
+        Industry-recognised credentials backing every skill listed above.
+      </p>
+    </header>
+
+    <div role="list" aria-label="List of certifications">
+      {certifications.map((cert, i) => (
+        <div
+          class="cert-card"
+          role="listitem"
+          style={`transition-delay: ${i * 80}ms`}
+        >
+          <span class="cert__icon" aria-hidden="true">{cert.badge}</span>
+          <div>
+            <div class="cert__name">{cert.name}</div>
+            <div class="cert__meta">{cert.issuer} · {cert.date}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+import { personal } from '../data/cv';
+---
+
+<footer class="footer" aria-label="Site footer">
+  <!-- Giant display text — Lando Norris footer DNA -->
+  <div class="footer__giant" aria-hidden="true">TAQI.</div>
+
+  <div class="footer__bottom">
+    <div class="container footer__inner">
+      <p class="footer__copy">
+        © <span data-year></span>
+        <span>{personal.fullName}</span>.
+        Built with Astro &amp; <span>✦</span> in Cairo.
+      </p>
+
+      <nav class="footer__socials" aria-label="Social links">
+        <a
+          href={personal.github}
+          target="_blank"
+          rel="noopener"
+          class="footer__social"
+          aria-label="GitHub profile"
+        >GitHub</a>
+        <a
+          href={personal.linkedin}
+          target="_blank"
+          rel="noopener"
+          class="footer__social"
+          aria-label="LinkedIn profile"
+        >LinkedIn</a>
+        <a
+          href={`mailto:${personal.email}`}
+          class="footer__social"
+          aria-label={`Email ${personal.email}`}
+        >Email</a>
+      </nav>
+    </div>
+  </div>
+</footer>

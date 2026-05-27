@@ -1,0 +1,37 @@
+---
+import { skills } from '../data/cv';
+---
+
+<section id="skills" class="section" aria-label="Technical skills">
+  <div class="container">
+
+    <header class="section-header">
+      <div>
+        <div class="section-num">03 — Stack</div>
+        <h2 class="section-title" data-reveal>My Tech<br/>Arsenal</h2>
+      </div>
+      <p class="about__body" data-reveal style="max-width:36ch;">
+        Hands-on tools and technologies across security, networking, and full-stack development.
+      </p>
+    </header>
+
+    <div class="skills-grid">
+      {skills.map((group, i) => (
+        <div
+          class="skill-group"
+          style={`transition-delay: ${i * 70}ms`}
+          aria-label={`${group.group} skills`}
+        >
+          <div class="skill-group__icon" aria-hidden="true">{group.icon}</div>
+          <h3 class="skill-group__title">{group.group}</h3>
+          <div class="skill-pills">
+            {group.items.map(item => (
+              <span class="skill-pill">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,61 @@
+# ============================================================
+# ASTRO PORTFOLIO — .gitignore
+# ============================================================
+
+# ── Build output ─────────────────────────────────────────
+dist/
+.output/
+
+# ── Astro generated ──────────────────────────────────────
+.astro/
+
+# ── Dependencies ─────────────────────────────────────────
+node_modules/
+
+# ── Environment variables ────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Logs ─────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ── OS files ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ──────────────────────────────────────────────
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+*.suo
+.history/
+
+# ── Claude Code ──────────────────────────────────────────
+.claude/
+
+# ── Design extract (large generated files) ───────────────
+design-extract-output/
+
+# ── CV / personal documents ──────────────────────────────
+*.pdf
+
+# ── Package manager lock files (keep only one) ───────────
+# Keeping package-lock.json — remove this line if using pnpm/yarn
+yarn.lock
+pnpm-lock.yaml
+
+# ── TypeScript ───────────────────────────────────────────
+*.tsbuildinfo
+
+# ── Misc ─────────────────────────────────────────────────
+.cache/
+.temp/
+.tmp/
+

@@ -1,0 +1,63 @@
+---
+import { personal } from '../data/cv';
+---
+
+<section id="contact" class="section contact-section" aria-label="Contact">
+  <div class="contact-section__grad" aria-hidden="true"></div>
+
+  <div class="container" style="position:relative; z-index:1;">
+
+    <div class="section-num" aria-hidden="true">06 — Contact</div>
+
+    <p class="contact__pre" data-reveal>
+      Got a project in mind? Need a security review? Let's talk.
+    </p>
+
+    <h2 class="contact__headline" data-reveal>
+      Always<br/>Bringing<br/>The <span>Fight.</span>
+    </h2>
+
+    <div class="contact__actions" data-reveal>
+      <a
+        href={`mailto:${personal.email}`}
+        class="btn btn-primary"
+        style="font-size:1rem; padding:1rem 2.25rem;"
+      >
+        Send an email
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </a>
+      <a
+        href={personal.linkedin}
+        target="_blank"
+        rel="noopener"
+        class="btn btn-ghost"
+        style="font-size:1rem; padding:1rem 2.25rem;"
+      >
+        LinkedIn
+      </a>
+      <a
+        href={personal.github}
+        target="_blank"
+        rel="noopener"
+        class="btn btn-ghost"
+        style="font-size:1rem; padding:1rem 2.25rem;"
+      >
+        GitHub
+      </a>
+    </div>
+
+    <a
+      href={`mailto:${personal.email}`}
+      class="contact__email"
+      data-reveal
+      aria-label={`Email: ${personal.email}`}
+    >
+      {personal.email}
+    </a>
+
+  </div>
+</section>

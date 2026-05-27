@@ -1,0 +1,203 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?:       string;
+  description?: string;
+  ogImage?:     string;
+}
+
+const {
+  title       = 'Taqi Eldeen — Cybersecurity & Full-Stack Developer',
+  description = 'Cybersecurity and Computer Science student at MIU Egypt. Hands-on in network security, WAF development, and secure web applications.',
+  ogImage     = '/og.png',
+} = Astro.props;
+
+const canonical = Astro.url.href;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="theme-color"  content="#282c20" />
+  <link rel="canonical" href={canonical} />
+
+  <!-- OG / Social -->
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:type"        content="website" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <title>{title}</title>
+
+  <!-- Fonts — Space Grotesk (closest open-source match to Mona Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Favicon (inline SVG) -->
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23282c20'/><text x='3' y='24' font-size='18' font-weight='900' fill='%23d2ff00' font-family='sans-serif'>TQ</text></svg>"
+  />
+</head>
+
+<body>
+  <!-- Scroll progress bar -->
+  <div class="progress-bar" id="progress" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <slot />
+
+  <script>
+    /* ── Progress bar ── */
+    const bar = document.getElementById('progress')!;
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+
+    /* ── Custom cursor ── */
+    const cur = document.getElementById('cursor')!;
+    if (window.matchMedia('(pointer: fine)').matches) {
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      (function loop() {
+        cx += (mx - cx) * 0.11;
+        cy += (my - cy) * 0.11;
+        cur.style.left = cx + 'px';
+        cur.style.top  = cy + 'px';
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll<HTMLElement>('a,button,[data-cur]').forEach(el => {
+        el.addEventListener('mouseenter', () => cur.classList.add('grow'));
+        el.addEventListener('mouseleave', () => cur.classList.remove('grow'));
+      });
+    } else {
+      cur.style.display = 'none';
+    }
+
+    /* ── Scroll reveal ── */
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ro.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll(
+      '[data-reveal], .project-card, .skill-group, .timeline-item, .cert-card'
+    ).forEach(el => ro.observe(el));
+
+    /* ── Active nav link ── */
+    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const links    = document.querySelectorAll<HTMLElement>('.nav__link[href^="#"]');
+    const secObs   = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l =>
+            l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)
+          );
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    sections.forEach(s => secObs.observe(s));
+
+    /* ── Number counters ── */
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el     = e.target as HTMLElement;
+        const target = parseInt(el.dataset.target!);
+        const suffix = el.dataset.suffix ?? '';
+        let cur      = 0;
+        const step   = target / (1400 / 16);
+        const timer  = setInterval(() => {
+          cur = Math.min(cur + step, target);
+          el.textContent = Math.floor(cur) + suffix;
+          if (cur >= target) clearInterval(timer);
+        }, 16);
+        counterObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+    /* ── Nav scroll state ── */
+    const nav = document.querySelector('.nav')!;
+    window.addEventListener('scroll', () =>
+      nav.classList.toggle('scrolled', window.scrollY > 56)
+    , { passive: true });
+
+    /* ── Mobile nav ── */
+    const toggle   = document.getElementById('nav-toggle')!;
+    const mobileNav = document.getElementById('mobile-nav')!;
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav?.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      })
+    );
+
+    /* ── Hero name reveal ── */
+    document.querySelectorAll('.hero__line').forEach((el, i) =>
+      setTimeout(() => el.classList.add('visible'), 180 + i * 110)
+    );
+
+    /* ── Parallax hero gradient ── */
+    const grad = document.querySelector<HTMLElement>('.hero__grad');
+    window.addEventListener('scroll', () => {
+      if (grad) grad.style.transform = `translateY(${window.scrollY * 0.38}px)`;
+    }, { passive: true });
+
+    /* ── Duplicate marquee for seamless loop ── */
+    document.querySelectorAll<HTMLElement>('.marquee-track').forEach(t => {
+      t.innerHTML += t.innerHTML;
+    });
+
+    /* ── Project card tilt ── */
+    document.querySelectorAll<HTMLElement>('.project-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width  - .5) * 7;
+        const y = ((e.clientY - r.top)  / r.height - .5) * -7;
+        card.style.transform = `translateY(-4px) rotateX(${y}deg) rotateY(${x}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+    /* ── Footer year ── */
+    const yr = document.querySelector('[data-year]');
+    if (yr) yr.textContent = String(new Date().getFullYear());
+
+    /* ── Smooth hash scrolling ── */
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(a =>
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href')!);
+        if (!t) return;
+        e.preventDefault();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+    );
+  </script>
+</body>
+</html>

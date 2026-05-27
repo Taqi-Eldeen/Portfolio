@@ -1,0 +1,131 @@
+---
+import { projects } from '../data/cv';
+
+/* SVG icons keyed by project icon name */
+const icons: Record<string, string> = {
+  shield: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M36 6L12 18v18c0 16.6 10.2 32 24 36 13.8-4 24-19.4 24-36V18L36 6z"
+          stroke="#d2ff00" stroke-width="2.5" fill="none"/>
+    <path d="M26 36l7 7 14-14" stroke="#d2ff00" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="36" cy="32" r="10" fill="rgba(210,255,0,.08)"/>
+  </svg>`,
+
+  trophy: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M22 10h28v22c0 11-7.2 18-14 18s-14-7-14-18V10z"
+          stroke="#d2ff00" stroke-width="2.5" fill="none"/>
+    <path d="M22 18H10v6a12 12 0 0 0 12 12M50 18h12v6a12 12 0 0 1-12 12"
+          stroke="#d2ff00" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M36 50v8M26 58h20" stroke="#d2ff00" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="36" cy="34" r="6" fill="rgba(210,255,0,.15)"/>
+  </svg>`,
+
+  network: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="36" cy="36" r="6"  fill="#d2ff00"/>
+    <circle cx="12" cy="18" r="5"  stroke="#d2ff00" stroke-width="2" fill="none"/>
+    <circle cx="60" cy="18" r="5"  stroke="#d2ff00" stroke-width="2" fill="none"/>
+    <circle cx="12" cy="54" r="5"  stroke="#d2ff00" stroke-width="2" fill="none"/>
+    <circle cx="60" cy="54" r="5"  stroke="#d2ff00" stroke-width="2" fill="none"/>
+    <line x1="17" y1="21" x2="31" y2="32" stroke="#d2ff00" stroke-width="1.5" opacity=".6"/>
+    <line x1="55" y1="21" x2="41" y2="32" stroke="#d2ff00" stroke-width="1.5" opacity=".6"/>
+    <line x1="17" y1="51" x2="31" y2="40" stroke="#d2ff00" stroke-width="1.5" opacity=".6"/>
+    <line x1="55" y1="51" x2="41" y2="40" stroke="#d2ff00" stroke-width="1.5" opacity=".6"/>
+  </svg>`,
+
+  database: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="36" cy="18" rx="20" ry="8" stroke="#d2ff00" stroke-width="2.5" fill="rgba(210,255,0,.07)"/>
+    <path d="M16 18v12c0 4.4 9 8 20 8s20-3.6 20-8V18" stroke="#d2ff00" stroke-width="2.5" fill="none"/>
+    <path d="M16 30v12c0 4.4 9 8 20 8s20-3.6 20-8V30" stroke="#d2ff00" stroke-width="2.5" fill="none"/>
+  </svg>`,
+
+  cart: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14h8l8 28h28l6-18H22" stroke="#d2ff00" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="30" cy="52" r="4" fill="#d2ff00"/>
+    <circle cx="50" cy="52" r="4" fill="#d2ff00"/>
+    <path d="M34 32h12M34 24h8" stroke="#d2ff00" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+  </svg>`,
+};
+---
+
+<section id="projects" class="section" aria-label="Selected projects">
+  <div class="container">
+
+    <header class="section-header">
+      <div>
+        <div class="section-num">01 — Work</div>
+        <h2 class="section-title" data-reveal>Selected<br/>Projects</h2>
+      </div>
+      <a
+        href="https://github.com/Taqi-Eldeen"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-ghost"
+        data-reveal
+      >
+        All work on GitHub
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </a>
+    </header>
+
+    <div class="projects-grid">
+      {projects.map((p, i) => (
+        <article
+          class={`project-card${p.featured ? ' project-card--featured' : ''}`}
+          style={`transition-delay: ${i * 60}ms`}
+        >
+          <!-- Media -->
+          <div class="project-card__media">
+            <div
+              class="project-card__visual"
+              style={`background: ${p.gradient};`}
+              aria-hidden="true"
+            >
+              <Fragment set:html={icons[p.icon] ?? ''} />
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="project-card__body">
+            {p.award && (
+              <span class="project-card__award" aria-label={`Award: ${p.award}`}>
+                🏆 {p.award}
+              </span>
+            )}
+
+            <div class="project-card__tags">
+              {p.tags.map(t => <span class="tag">{t}</span>)}
+            </div>
+
+            <h3 class="project-card__title">{p.title}</h3>
+            <p class="project-card__sub">{p.subtitle}</p>
+
+            <ul class="project-card__desc">
+              {p.desc.map(d => <li>{d}</li>)}
+            </ul>
+
+            <a
+              href="https://github.com/Taqi-Eldeen"
+              target="_blank"
+              rel="noopener"
+              class="project-card__link"
+              aria-label={`View ${p.title} on GitHub`}
+            >
+              View project
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>

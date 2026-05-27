@@ -1,0 +1,77 @@
+---
+import { personal, stats } from '../data/cv';
+---
+
+<section id="hero" class="hero" aria-label="Introduction">
+  <div class="hero__grad"  aria-hidden="true"></div>
+  <div class="hero__noise" aria-hidden="true"></div>
+
+  <div class="container">
+
+    <!-- Available badge -->
+    <div class="hero__badge" aria-label="Currently available for opportunities">
+      <span class="hero__dot" aria-hidden="true"></span>
+      Open to opportunities
+    </div>
+
+    <!-- Name / Impact headline -->
+    <h1 class="impact hero__name" aria-label={personal.fullName}>
+      <span class="hero__line">Taqi</span>
+      <span class="hero__line hero__line--accent">El&shy;deen</span>
+      <span class="hero__line">Dev.</span>
+    </h1>
+
+    <div class="hero__rule" aria-hidden="true"></div>
+
+    <!-- Role + CTAs -->
+    <div class="hero__meta">
+      <p class="hero__role">
+        <strong>Cybersecurity</strong> &amp; <strong>Full-Stack Developer</strong> based in
+        <strong>Cairo, Egypt</strong>. Building secure, fast, and resilient systems — from
+        ML-powered WAFs to full-stack web platforms.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn-primary">
+          View my work
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+        <a href={personal.github} target="_blank" rel="noopener" class="btn btn-ghost">
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero__stats" role="list" aria-label="Key statistics">
+      {stats.map(s => (
+        <div role="listitem">
+          <div
+            class="stat__val"
+            data-target={s.value}
+            data-suffix={s.suffix}
+            aria-label={`${s.value}${s.suffix} ${s.label}`}
+          >
+            0{s.suffix}
+          </div>
+          <div class="stat__label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Scroll cue -->
+    <button
+      class="hero__scroll"
+      onclick="document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})"
+      aria-label="Scroll to projects section"
+    >
+      <span class="hero__scroll-line" aria-hidden="true"></span>
+      Scroll to explore
+    </button>
+
+  </div>
+</section>

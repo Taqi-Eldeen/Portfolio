@@ -1,0 +1,85 @@
+---
+import { experience, education } from '../data/cv';
+---
+
+<section id="experience" class="section exp-section" aria-label="Work experience and education">
+  <div class="container">
+
+    <header class="section-header">
+      <div>
+        <div class="section-num">04 — Experience</div>
+        <h2 class="section-title" data-reveal>Where I've<br/>Shown Up</h2>
+      </div>
+    </header>
+
+    <div class="exp-grid">
+
+      <!-- Timeline -->
+      <div class="timeline" role="list" aria-label="Work experience timeline">
+        {experience.map((exp, i) => (
+          <article
+            class="timeline-item"
+            role="listitem"
+            style={`transition-delay: ${i * 100}ms`}
+          >
+            <div class="tl__period">{exp.period}</div>
+            <span class="tl__type">{exp.type}</span>
+            <h3 class="tl__role">{exp.role}</h3>
+            <p class="tl__company">{exp.company}</p>
+            {exp.bullets.map(b => (
+              <p class="tl__desc">{b}</p>
+            ))}
+          </article>
+        ))}
+
+        <!-- Education as timeline entry -->
+        {education.map((edu, i) => (
+          <article
+            class="timeline-item"
+            role="listitem"
+            style={`transition-delay: ${(experience.length + i) * 100}ms`}
+          >
+            <div class="tl__period">{edu.period}</div>
+            <span class="tl__type">Education</span>
+            <h3 class="tl__role">{edu.degree}</h3>
+            <p class="tl__company">{edu.school} · {edu.location}</p>
+            <p class="tl__desc">
+              Cybersecurity Track — studying firewall design, VPN protocols, cryptography,
+              network security, and secure full-stack development.
+            </p>
+          </article>
+        ))}
+      </div>
+
+      <!-- Sidebar highlights -->
+      <div data-reveal="right">
+        <div class="skill-group" style="margin-bottom:1rem;">
+          <div class="skill-group__icon" aria-hidden="true">🏅</div>
+          <h3 class="skill-group__title">Highlights</h3>
+          <div class="skill-pills" style="margin-top:.75rem;">
+            <span class="skill-pill">Best Project Award — Spring 2024</span>
+            <span class="skill-pill">CyShield Sponsorship</span>
+            <span class="skill-pill">MIUCC 2025 Contributor</span>
+            <span class="skill-pill">Red Hat Certified</span>
+            <span class="skill-pill">IBM SkillsBuild x2</span>
+            <span class="skill-pill">Cisco Certified</span>
+            <span class="skill-pill">104 Git Commits (one project)</span>
+            <span class="skill-pill">20+ Device Network Lab</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group__icon" aria-hidden="true">📡</div>
+          <h3 class="skill-group__title">Currently working on</h3>
+          <div class="skill-pills" style="margin-top:.75rem;">
+            <span class="skill-pill">Web Hydra WAF (grad project)</span>
+            <span class="skill-pill">Red Hat certification path</span>
+            <span class="skill-pill">Advanced network security</span>
+            <span class="skill-pill">ML-based threat detection</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

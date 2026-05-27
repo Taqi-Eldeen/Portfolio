@@ -1,0 +1,89 @@
+---
+import { personal, education } from '../data/cv';
+---
+
+<section id="about" class="section about-section" aria-label="About Taqi Eldeen">
+  <div class="about-section__bg" aria-hidden="true">SECURE</div>
+
+  <div class="container">
+
+    <header class="section-header">
+      <div>
+        <div class="section-num">02 — About</div>
+      </div>
+    </header>
+
+    <div class="about-grid">
+
+      <!-- Left — statement + metrics -->
+      <div>
+        <p class="about__statement" data-reveal="left">
+          I'm a developer who believes <em>security is not a feature</em> —
+          it's the foundation every great system is built on.
+        </p>
+
+        <div class="about__metrics" role="list">
+          <div role="listitem" data-reveal data-delay="1">
+            <div class="metric__val" data-target="5"   data-suffix="+">0+</div>
+            <div class="metric__label">Projects shipped</div>
+          </div>
+          <div role="listitem" data-reveal data-delay="2">
+            <div class="metric__val" data-target="5"   data-suffix="">0</div>
+            <div class="metric__label">Certifications</div>
+          </div>
+          <div role="listitem" data-reveal data-delay="3">
+            <div class="metric__val" data-target="104" data-suffix="">0</div>
+            <div class="metric__label">Git commits (best project)</div>
+          </div>
+          <div role="listitem" data-reveal data-delay="4">
+            <div class="metric__val" data-target="20"  data-suffix="+">0+</div>
+            <div class="metric__label">Network devices (lab)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — bio + education -->
+      <div data-reveal="right">
+        <p class="about__body">
+          Based in <strong>Cairo, Egypt</strong>, I'm studying
+          <strong>B.Sc. Computer Science (Cybersecurity Track)</strong> at
+          <strong>Misr International University</strong> (2022–2026). I combine deep
+          security knowledge with practical full-stack development skills.
+        </p>
+        <p class="about__body">
+          My graduation project — <strong>Web Hydra</strong> — is an ML-powered Web
+          Application Firewall <strong>sponsored by CyShield</strong>. It uses behavioural
+          profiling and signature-based detection to block threats in real time.
+        </p>
+        <p class="about__body">
+          Outside of code, I'm on Cisco Packet Tracer designing multi-site enterprise
+          networks, studying cryptography, or earning the next Red Hat / IBM certification.
+          I thrive where <strong>security meets engineering excellence</strong>.
+        </p>
+
+        <div style="margin-top:2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <a
+            href={`mailto:${personal.email}`}
+            class="btn btn-primary"
+          >
+            Work together
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener"
+            class="btn btn-ghost"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
